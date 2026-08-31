@@ -21,14 +21,14 @@ main{width:min(1160px,94%);margin:auto;padding:35px 0 80px}
 .badge{padding:5px 9px;border-radius:999px}.or{background:#f0d16f}.argent{background:#dce0e3}.bronze{background:#d3a07a}.outsider{background:#c9dba8}.bonus{background:#c8d6ef}
 .note{margin:35px 0;background:#fff8e9;border-left:5px solid #d4a83f;padding:18px;border-radius:14px;line-height:1.6}
 footer{background:#17243d;color:#fff9;text-align:center;padding:25px}
-@media(max-width:850px){.hero-inner{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.top nav{display:none}}
+@media(max-width:850px){.hero-inner{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}.top nav{display:block}.top nav .archives-link{display:none}.top nav .home-link{display:inline-flex;align-items:center;gap:.4rem;margin-left:0;padding:9px 12px;border:1px solid #ffffff55;border-radius:999px;background:#ffffff12}}
 @media(max-width:570px){.grid{grid-template-columns:1fr}.toolbar{top:58px}.random{grid-template-columns:1fr}}
 
 .principle-icon{display:inline-grid;place-items:center;width:1.35em;height:1.35em;margin-right:.35em;border-radius:50%;background:#d4a83f;color:#17243d;font-style:normal;font-size:.85em}
 .image-courgette{grid-column:1/-1;min-height:auto}
 .image-courgette .courgette-image{display:block;width:100%;max-height:520px;object-fit:contain;border-radius:14px;margin-top:12px;background:#f2eadc;border:1px solid #ddccb0}
 </style></head><body>
-<header class="top"><div class="brand"><b>M. Weens</b><small>Collège Jean Rostand de Licques</small></div><nav><a href="https://wweens.github.io/Site-M-Weens/">Accueil</a><a href="#archives">Archives</a></nav></header>
+<header class="top"><div class="brand"><b>M. Weens</b><small>Collège Jean Rostand de Licques</small></div><nav><a class="home-link" href="https://wweens.github.io/Site-M-Weens/" aria-label="Retour à la page d'accueil">⌂ Accueil</a><a class="archives-link" href="#archives">Archives</a></nav></header>
 <section class="hero"><div class="hero-inner"><div><div style="color:#f0d071;font-weight:900;letter-spacing:.15em">ARCHIVES OFFICIELLES DE LA COURGETTISE</div><h1>Les Courgettes d'Or</h1><p class="lead">Depuis 2013, les réponses les plus inattendues du collège sont soigneusement récoltées, classées et récompensées. Voici les millésimes réellement publiés sur l'ancien site, réunis pour la première fois dans une archive unique.</p></div><div class="hero-box"><b><span class="principle-icon" aria-hidden="true">★</span> Principe fondateur</b><p>On rit avec les élèves, jamais contre eux. Ici, une erreur magnifique peut valoir davantage qu'une bonne réponse : elle peut entrer dans l'Histoire.</p></div></div></section>
 <main id="archives">
 <div class="toolbar"><button class="active" data-year="all">Toutes</button><button data-year="2024-2025">2024-2025</button><button data-year="2018-2019">2018-2019</button><button data-year="2015-2016">2015-2016</button><button data-year="2014-2015">2014-2015</button><button data-year="2013-2014">2013-2014</button><button data-rank="Outsider">Outsiders</button><input id="search" placeholder="🔎 Prénom, mot, expression…"></div>

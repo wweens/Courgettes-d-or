@@ -3,11 +3,75 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Courgettes d'Or — Accueil</title>
-<style>
-:root{--nav:#17243d;--burg:#742333;--gold:#d4a83f;--paper:#f5eddf;--ink:#29241f}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,Segoe UI,Arial,sans-serif;background:#eee4d3;color:var(--ink)}
-.hero{min-height:100vh;display:grid;place-items:center;padding:40px 6vw;background:linear-gradient(135deg,#17243d,#742333);color:#fff;text-align:center}.wrap{max-width:900px}.hero h1{font-family:Georgia,serif;font-size:clamp(2.5rem,7vw,5.5rem);margin:0 0 14px}.hero p{font-size:1.1rem;line-height:1.6;opacity:.92}.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-top:34px}.btn{display:inline-block;padding:15px 22px;border-radius:999px;text-decoration:none;font-weight:850}.current{background:#d4a83f;color:#17243d}.archives{background:#fff;color:#742333}.small{margin-top:28px;font-size:.9rem;opacity:.72}
-</style>
+<title>Les Courgettes d'Or — Archives</title>
+<style>html,body,#archives{width:100%;height:100%;margin:0;border:0;display:block;background:#f5eddf}body{overflow:hidden}</style>
 </head>
-<body><main class="hero"><div class="wrap"><h1>Les Courgettes d'Or</h1><p>Les fulgurances les plus mémorables entendues en classe au Collège Jean Rostand de Licques.</p><div class="actions"><a class="btn current" href="2025-2026.html">🏆 Saison 2025-2026</a><a class="btn archives" href="archives.html">📚 Toutes les archives</a></div><p class="small">La saison en cours est mise en avant, tandis que l'intégralité des anciennes Courgettes reste accessible.</p></div></main></body></html>
+<body>
+<iframe id="archives" src="archives.html" title="Les Courgettes d'Or"></iframe>
+<script>
+const entries=[
+ {month:'Septembre',rank:'Or',name:'Chloé',text:'« Monsieur… — Oui ? — Mon stylo, il fonctionne pas… — Tu as essayé de retirer ta feuille de la pochette plastique ? — Ah ben non… — Voilà… »'},
+ {month:'Septembre',rank:'Argent',name:'Mathys',text:'Énigme : « Il est blanc au début de la journée mais sale le soir ; sur lui j\'écris pour transmettre mon savoir. » — « Un élève. »'},
+ {month:'Septembre',rank:'Bronze',name:'Martin',text:'« Ambulo, ça fait penser à quoi ? — À un boulon ! »'},
+ {month:'Septembre',rank:'Outsider',name:'Maëlle',text:'« Pourquoi vous demandez de prendre des pochettes plastiques alors que vous distribuez des feuilles en papier… ? — Ben… pour les mettre dedans ! »'},
+ {month:'Septembre',rank:'Outsider',name:'Alonovy',text:'« Thalis, c\'est celui qui a inventé le triangle. »'},
+ {month:'Septembre',rank:'Outsider',name:'Maël',text:'« C\'est quoi un gouvernement ? »'},
+ {month:'Septembre',rank:'Outsider',name:'Mahoria',text:'« Ma feuille était pleine de gris de brouillage. »'},
+ {month:'Septembre',rank:'Outsider',name:'Inès',text:'« Jean-Paul devient un C.O… ? — N ! — Non… COD ! »'},
+ {month:'Septembre',rank:'Outsider',name:'Clément',text:'« Mais monsieur, je crois que plus personne ne parle latin là-bas… »'},
+ {month:'Septembre',rank:'Outsider',name:'Maëlle',text:'« Le cambriolage de la BF, il faut faire quoi ? »'},
+ {month:'Octobre',rank:'Or',name:'Nathan',text:'« Fred et Sammy, les copains de Scoobidoo. — Ah ! Comme par hasard ! Comme dans C\'est pas sorcier ! — Fred et Jamy… »'},
+ {month:'Octobre',rank:'Argent',name:'Maëlle',text:'« Anima sana in C. S… — On n\'est pas des animaux ! »'},
+ {month:'Octobre',rank:'Bronze',name:'Victoire',text:'« Pourquoi Poséidon offre-t-il de l\'eau salie ? — Pas salie… salée ! »'},
+ {month:'Novembre',rank:'Or',name:'Tom',text:'« Le nom Iule est à l\'origine du nom d\'un personnage célèbre de l\'Histoire. — Jul ! — Julio César… »'},
+ {month:'Novembre',rank:'Argent',name:'Jade',text:'« Qui est la mère d\'Athéna ? — Poséidon. »'},
+ {month:'Novembre',rank:'Bronze',name:'Anonyme',text:'Après l\'explication de la présentation d\'une copie, un élève recopie consciencieusement les exemples du tableau : « TARTIFLETTE », « Jean-Michel », « 3 C ».'}
+];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+function childRun(doc,code){const s=doc.createElement('script');s.textContent=code;doc.body.appendChild(s);s.remove();}
+function buildSeason(doc){
+ const main=doc.querySelector('main'); if(!main||doc.querySelector('.season-2025-injected')) return;
+ const season=doc.createElement('section'); season.className='season-2025-injected';
+ const months=['Novembre','Octobre','Septembre'];
+ season.innerHTML='<div class="current-season-title"><h2>2025-2026</h2><p>Saison actuelle</p></div>'+months.map(month=>{
+   const cards=entries.filter(e=>e.month===month).map(e=>`<article class="quote-card injected-2025" data-year="2025-2026" data-rank="${esc(e.rank)}" data-search="${esc(norm(e.name+' '+e.text+' '+month+' '+e.rank))}"><div class="injected-rank rank-${norm(e.rank)}">${e.rank==='Or'?'🥇':e.rank==='Argent'?'🥈':e.rank==='Bronze'?'🥉':'★'} ${esc(e.rank)}</div><h3>${esc(e.name)}</h3><p>${esc(e.text)}</p></article>`).join('');
+   return `<section class="month-block injected-month" data-year="2025-2026"><h2>${month} 2025</h2><div class="injected-grid">${cards}</div></section>`;
+ }).join('');
+ main.insertBefore(season,main.firstChild);
+ const style=doc.createElement('style'); style.textContent=`
+ .season-2025-injected{margin-bottom:2.5rem}.current-season-title{display:flex;align-items:baseline;gap:1rem;margin:0 0 1.4rem;padding:.25rem 0}.current-season-title h2{margin:0}.current-season-title p{margin:0;opacity:.65;font-weight:700}
+ .injected-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin:1rem 0 2rem}.injected-2025{box-sizing:border-box}.injected-rank{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin:0 0 .35rem;padding:.3rem .55rem;border-radius:999px;background:rgba(0,0,0,.06)}
+ .rank-or{background:#f2d77b}.rank-argent{background:#d8dde3}.rank-bronze{background:#dfb183}.rank-outsider{background:#ead8dc}.injected-month>h2{margin-top:1.6rem}
+ `; doc.head.appendChild(style);
+ // Les filtres existants utilisent un tableau de cartes constitué au chargement : on y ajoute les nouvelles cartes.
+ const dataJSON=JSON.stringify(entries.map(e=>({year:'2025-2026',month:e.month,rank:e.rank,name:e.name,text:e.text,cat:e.rank==='Outsider'?'Outsider':'Palmarès'})));
+ childRun(doc,`try{DATA.push(...${dataJSON});cards.push(...document.querySelectorAll('.injected-2025'));apply();}catch(e){console.warn('Courgettes 2025-2026 : filtre enrichi en mode compatibilité',e);}`);
+}
+function addYearChoice(doc){
+ // Cas 1 : sélecteur déroulant.
+ for(const sel of doc.querySelectorAll('select')){
+   const opts=[...sel.options];
+   if(opts.some(o=>/2024\s*[-–]\s*2025/.test(o.textContent)||o.value==='2024-2025') && !opts.some(o=>o.value==='2025-2026')){
+     const o=doc.createElement('option');o.value='2025-2026';o.textContent='2025-2026';
+     const ref=opts.find(x=>/2024\s*[-–]\s*2025/.test(x.textContent)||x.value==='2024-2025');sel.insertBefore(o,ref||sel.firstChild);
+     sel.addEventListener('change',()=>childRun(doc,`try{year=${JSON.stringify(sel.value)};apply();}catch(e){}`));
+   }
+ }
+ // Cas 2 : boutons/onglets d'année. On clone le bouton 2024-2025 afin de conserver exactement son aspect.
+ const all=[...doc.querySelectorAll('button,a,[role="button"]')];
+ const ref=all.find(el=>/^\s*2024\s*[-–]\s*2025\s*$/.test(el.textContent||''));
+ if(ref && !all.some(el=>/^\s*2025\s*[-–]\s*2026\s*$/.test(el.textContent||''))){
+   const b=ref.cloneNode(true); b.textContent='2025-2026';
+   for(const a of [...b.attributes]) if(/2024-2025/.test(a.value)) b.setAttribute(a.name,a.value.replace(/2024-2025/g,'2025-2026'));
+   if(b.tagName==='A') b.setAttribute('href','#');
+   b.addEventListener('click',ev=>{ev.preventDefault();childRun(doc,`try{year='2025-2026';apply();}catch(e){}`);});
+   ref.parentNode.insertBefore(b,ref);
+ }
+}
+document.getElementById('archives').addEventListener('load',function(){
+ try{const doc=this.contentDocument;buildSeason(doc);addYearChoice(doc);doc.title="Les Courgettes d'Or — Archives";}catch(e){console.error(e)}
+});
+</script>
+</body>
+</html>

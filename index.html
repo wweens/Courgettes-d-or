@@ -43,7 +43,10 @@ function buildSeason(doc){
    }).join('');
    return `<section class="month-block injected-month" data-year="2025-2026"><h2>${month}</h2><div class="injected-grid">${cards}</div></section>`;
  }).join('');
- main.insertBefore(season,main.firstChild);
+ const firstArchiveCard=main.querySelector('.quote-card[data-year="2024-2025"]');
+ let anchor=firstArchiveCard;
+ while(anchor && anchor.parentElement!==main) anchor=anchor.parentElement;
+ if(anchor) main.insertBefore(season,anchor); else main.appendChild(season);
  const style=doc.createElement('style'); style.textContent=`
  .season-2025-injected{margin-bottom:2.5rem}.current-season-title{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin:0 0 1.4rem;padding:.25rem 0;border-bottom:3px solid #7e2335}.current-season-title>div{display:flex;align-items:baseline;gap:1rem}.current-season-title h2{margin:0;color:#8b2438;font-family:Georgia,serif;font-size:clamp(2.1rem,5vw,3.3rem)}.current-season-title p{margin:0 0 .45rem;opacity:.65;font-weight:700}.current-kicker{font-weight:900;letter-spacing:.08em;color:#806d5d}
  .injected-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin:1rem 0 2rem}.injected-2025{box-sizing:border-box}.injected-rank{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin:0 0 .35rem;padding:.3rem .55rem;border-radius:999px;background:rgba(0,0,0,.06)}

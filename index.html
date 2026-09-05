@@ -10,56 +10,50 @@
 <iframe id="archives" src="archives.html" title="Les Courgettes d'Or"></iframe>
 <script>
 const entries=[
- {month:'Septembre',rank:'Or',name:'Chloé',id:'1_KnZy_Ws73shPnBP6nMPacWuaheKk_0a'},
- {month:'Septembre',rank:'Argent',name:'Mathys',id:'1AhFVdXApeeO-4uwyTb0i799Rnl0mIXro'},
- {month:'Septembre',rank:'Bronze',name:'Martin',id:'19b1p3kdAxWBpN8e7oPMvUr-RW-8oZ2Eq'},
- {month:'Septembre',rank:'Outsider',name:'Maëlle',id:'1B-8MDoCddSmziL87dzOyGIOAzWtH8fqC',focus:'72% 50%',crop:true},
- {month:'Septembre',rank:'Outsider',name:'Alonovy',id:'1aCoxG6M7yV8nBtHonGwGTgdcSPCTG4uu'},
- {month:'Septembre',rank:'Outsider',name:'Maël',id:'1B-8MDoCddSmziL87dzOyGIOAzWtH8fqC',focus:'28% 45%',crop:true},
- {month:'Septembre',rank:'Outsider',name:'Mahoria',id:'1ukYQRQ6A8cexwX3gV6WCi7-fiKLqCwP-'},
- {month:'Septembre',rank:'Outsider',name:'Inès',id:'152kwDN7WD35xJoGhAGu8RLjWT7smQmO7'},
- {month:'Septembre',rank:'Outsider',name:'Clément',id:'1wxiIljmN-1NyKHYwoJ2ZdqiSw4aBow6T',focus:'50% 37%',crop:true},
- {month:'Septembre',rank:'Outsider',name:'Maëlle',id:'1wxiIljmN-1NyKHYwoJ2ZdqiSw4aBow6T',focus:'50% 70%',crop:true},
- {month:'Octobre',rank:'Or',name:'Nathan',id:'1tx4EoUIrQXrwfoPAksT5oR-YZgWh9e-2'},
- {month:'Octobre',rank:'Argent',name:'Maëlle',id:'1xvhh5I8jfM1uctFqTirouHgA2B56l9vj'},
- {month:'Octobre',rank:'Bronze',name:'Victoire',id:'1rHdYWyDjq9pAQQzRPrIJHv9Rr5z7NSjC',focus:'43% 48%',crop:true},
- {month:'Novembre',rank:'Or',name:'Tom',id:'1yZ0TKgnkkLF6EFhkAJLB0ltxg6xCP-Ty'},
- {month:'Novembre',rank:'Argent',name:'Jade',id:'11sqz8KY8pMAgI0bhEf5JFcFABFL3y2GA'},
- {month:'Novembre',rank:'Bronze',name:'Anonyme',id:'1M4u7QvdW8vCxM4XseGhufGXy0noph6Wv'}
+ {month:'Septembre',rank:'Or',name:'Chloé',text:'« Monsieur… — Oui ? — Mon stylo, il fonctionne pas… — Tu as essayé de retirer ta feuille de la pochette plastique ? — Ah ben non… — Voilà… »'},
+ {month:'Septembre',rank:'Argent',name:'Mathys',text:'Énigme : « Il est blanc au début de la journée mais sale le soir ; sur lui j\'écris pour transmettre mon savoir. » — « Un élève. »'},
+ {month:'Septembre',rank:'Bronze',name:'Martin',text:'« Ambulo, ça fait penser à quoi ? — À un boulon ! »'},
+ {month:'Septembre',rank:'Outsider',name:'Maëlle',text:'« Pourquoi vous demandez de prendre des pochettes plastiques alors que vous distribuez des feuilles en papier… ? — Ben… pour les mettre dedans ! »'},
+ {month:'Septembre',rank:'Outsider',name:'Alonovy',text:'« Thalis, c\'est celui qui a inventé le triangle. »'},
+ {month:'Septembre',rank:'Outsider',name:'Maël',text:'« C\'est quoi un gouvernement ? »'},
+ {month:'Septembre',rank:'Outsider',name:'Mahoria',text:'« Ma feuille était pleine de gris de brouillage. »'},
+ {month:'Septembre',rank:'Outsider',name:'Inès',text:'« Jean-Paul devient un C.O… ? — N ! — Non… COD ! »'},
+ {month:'Septembre',rank:'Outsider',name:'Clément',text:'« Mais monsieur, je crois que plus personne ne parle latin là-bas… »'},
+ {month:'Septembre',rank:'Outsider',name:'Maëlle',text:'« Le cambriolage de la BF, il faut faire quoi ? »'},
+ {month:'Octobre',rank:'Or',name:'Nathan',text:'« Fred et Sammy, les copains de Scoobidoo. — Ah ! Comme par hasard ! Comme dans C\'est pas sorcier ! — Fred et Jamy… »'},
+ {month:'Octobre',rank:'Argent',name:'Maëlle',text:'« Anima sana in C. S… — On n\'est pas des animaux ! »'},
+ {month:'Octobre',rank:'Bronze',name:'Victoire',text:'« Pourquoi Poséidon offre-t-il de l\'eau salie ? — Pas salie… salée ! »'},
+ {month:'Novembre',rank:'Or',name:'Tom',text:'« Le nom Iule est à l\'origine du nom d\'un personnage célèbre de l\'Histoire. — Jul ! — Julio César… »'},
+ {month:'Novembre',rank:'Argent',name:'Jade',text:'« Qui est la mère d\'Athéna ? — Poséidon. »'},
+ {month:'Novembre',rank:'Bronze',name:'Photo du 20 novembre',photo:'https://drive.google.com/thumbnail?id=1M4u7QvdW8vCxM4XseGhufGXy0noph6Wv&sz=w1600'}
 ];
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-const photoURL=id=>'https://drive.google.com/thumbnail?id='+encodeURIComponent(id)+'&sz=w1400';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>String(s??'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 function childRun(doc,code){const s=doc.createElement('script');s.textContent=code;doc.body.appendChild(s);s.remove();}
 function buildSeason(doc){
  const main=doc.querySelector('main'); if(!main||doc.querySelector('.season-2025-injected')) return;
  const season=doc.createElement('section'); season.className='season-2025-injected';
- const months=['Novembre','Octobre','Septembre'];
+ const months=['Septembre','Octobre','Novembre'];
  season.innerHTML='<div class="current-season-title"><div><span class="current-kicker">MILLÉSIME</span><h2>2025-2026</h2></div><p>16 courgettes retrouvées</p></div>'+months.map(month=>{
-   const cards=entries.filter(e=>e.month===month).map(e=>`<article class="quote-card injected-2025" data-year="2025-2026" data-rank="${esc(e.rank)}" data-search="${esc(norm(e.name+' '+month+' '+e.rank))}"><div class="injected-rank rank-${norm(e.rank)}">${e.rank==='Or'?'🥇':e.rank==='Argent'?'🥈':e.rank==='Bronze'?'🥉':'★'} ${esc(e.rank)}</div><h3>${esc(e.name)}</h3><div class="courgette-photo-wrap ${e.crop?'is-crop':''}"><img class="courgette-photo" src="${photoURL(e.id)}" alt="Courgette de ${esc(e.name)}, ${esc(month)} 2025" loading="lazy" style="object-position:${esc(e.focus||'50% 50%')}"></div></article>`).join('');
+   const cards=entries.filter(e=>e.month===month).map(e=>{
+     const body=e.photo
+       ? `<div class="courgette-photo-wrap"><img class="courgette-photo" src="${esc(e.photo)}" alt="Courgette photographiée le 20 novembre 2025" loading="lazy"></div>`
+       : `<p class="injected-text">${esc(e.text)}</p>`;
+     return `<article class="quote-card injected-2025" data-year="2025-2026" data-rank="${esc(e.rank)}" data-search="${esc(norm(e.name+' '+month+' '+e.rank+' '+(e.text||'')))}"><div class="injected-rank rank-${norm(e.rank)}">${e.rank==='Or'?'🥇':e.rank==='Argent'?'🥈':e.rank==='Bronze'?'🥉':'★'} ${esc(e.rank)}</div><h3>${esc(e.name)}</h3>${body}</article>`;
+   }).join('');
    return `<section class="month-block injected-month" data-year="2025-2026"><h2>${month}</h2><div class="injected-grid">${cards}</div></section>`;
  }).join('');
  main.insertBefore(season,main.firstChild);
  const style=doc.createElement('style'); style.textContent=`
  .season-2025-injected{margin-bottom:2.5rem}.current-season-title{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin:0 0 1.4rem;padding:.25rem 0;border-bottom:3px solid #7e2335}.current-season-title>div{display:flex;align-items:baseline;gap:1rem}.current-season-title h2{margin:0;color:#8b2438;font-family:Georgia,serif;font-size:clamp(2.1rem,5vw,3.3rem)}.current-season-title p{margin:0 0 .45rem;opacity:.65;font-weight:700}.current-kicker{font-weight:900;letter-spacing:.08em;color:#806d5d}
  .injected-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:1rem;margin:1rem 0 2rem}.injected-2025{box-sizing:border-box}.injected-rank{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;margin:0 0 .35rem;padding:.3rem .55rem;border-radius:999px;background:rgba(0,0,0,.06)}
- .rank-or{background:#f2d77b}.rank-argent{background:#d8dde3}.rank-bronze{background:#dfb183}.rank-outsider{background:#ead8dc}.injected-month>h2{margin-top:1.6rem}.courgette-photo-wrap{width:100%;margin-top:.75rem;border-radius:12px;overflow:hidden;background:#eee7dc;display:flex;align-items:center;justify-content:center}.courgette-photo{display:block;width:100%;max-height:520px;object-fit:contain}.courgette-photo-wrap.is-crop{aspect-ratio:4/3}.courgette-photo-wrap.is-crop .courgette-photo{height:100%;max-height:none;object-fit:cover}
- @media(max-width:640px){.current-season-title{align-items:flex-start;flex-direction:column}.current-season-title>div{display:block}.current-season-title p{margin:0}.courgette-photo{max-height:440px}}
+ .rank-or{background:#f2d77b}.rank-argent{background:#d8dde3}.rank-bronze{background:#dfb183}.rank-outsider{background:#ead8dc}.injected-month>h2{margin-top:1.6rem}.injected-text{font-size:1rem;line-height:1.55;margin:.7rem 0 0}.courgette-photo-wrap{width:100%;margin-top:.75rem;border-radius:12px;overflow:hidden;background:#eee7dc;display:flex;align-items:center;justify-content:center}.courgette-photo{display:block;width:100%;height:auto;max-height:620px;object-fit:contain}
+ @media(max-width:640px){.current-season-title{align-items:flex-start;flex-direction:column}.current-season-title>div{display:block}.current-season-title p{margin:0}.courgette-photo{max-height:480px}}
  `; doc.head.appendChild(style);
- // Le moteur de filtres existant a mémorisé les cartes au chargement : on lui ajoute les nouvelles.
  childRun(doc,`try{cards.push(...document.querySelectorAll('.injected-2025'));apply();}catch(e){console.warn('Courgettes 2025-2026 : filtre enrichi en mode compatibilité',e);}`);
- // Met à jour les deux compteurs visibles de l'archive sans toucher à sa mise en page.
  [...doc.querySelectorAll('body *')].forEach(el=>{if(el.children.length===0){const t=(el.textContent||'').trim();if(/^174 courgettes affichées$/.test(t))el.textContent='190 courgettes affichées';if(/^5 millésimes publiés retrouvés$/.test(t))el.textContent='6 millésimes publiés retrouvés';}});
 }
 function addYearChoice(doc){
- for(const sel of doc.querySelectorAll('select')){
-   const opts=[...sel.options];
-   if(opts.some(o=>/2024\s*[-–]\s*2025/.test(o.textContent)||o.value==='2024-2025') && !opts.some(o=>o.value==='2025-2026')){
-     const o=doc.createElement('option');o.value='2025-2026';o.textContent='2025-2026';
-     const ref=opts.find(x=>/2024\s*[-–]\s*2025/.test(x.textContent)||x.value==='2024-2025');sel.insertBefore(o,ref||sel.firstChild);
-     sel.addEventListener('change',()=>childRun(doc,`try{year=${JSON.stringify(sel.value)};apply();}catch(e){}`));
-   }
- }
  const all=[...doc.querySelectorAll('button,a,[role="button"]')];
  const ref=all.find(el=>/^\s*2024\s*[-–]\s*2025\s*$/.test(el.textContent||''));
  if(ref && !all.some(el=>/^\s*2025\s*[-–]\s*2026\s*$/.test(el.textContent||''))){
